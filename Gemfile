@@ -43,3 +43,31 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :development do
+  gem 'guard'
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'guard-annotate'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'annotate', '>=2.5.0'
+end
+
+# Sprocket
+gem 'haml-rails'
+gem 'ejs'
+
+# Auth
+gem 'devise'
+gem 'cancan'
+
+# ActiveRecord
+gem 'state_machine'
+
+# View helpers
+gem 'simple_form'
+gem 'codemirror-rails'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github => 'anjlab/bootstrap-rails'
