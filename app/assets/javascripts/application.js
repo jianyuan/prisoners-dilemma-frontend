@@ -16,6 +16,7 @@
 //= require twitter/bootstrap
 //= require codemirror
 //= require codemirror/modes/python
+//= require highlight.pack
 //= require jquery.netchanger
 //= require jquery.safetynet
 //= require_tree .

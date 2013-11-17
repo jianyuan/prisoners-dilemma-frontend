@@ -22,3 +22,5 @@ class AlgorithmEditor
 $ ->
   if $('body.algorithms.edit').length > 0
     window.algorithmEditor = new AlgorithmEditor
+
+  hljs.initHighlightingOnLoad()
