@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: algorithms
+#
+#  id                :integer          not null, primary key
+#  user_id           :integer
+#  name              :string(255)
+#  code              :text
+#  privacy           :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  benchmark_against :boolean          default(FALSE)
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

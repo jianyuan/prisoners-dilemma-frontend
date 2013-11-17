@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20131117031019) do
   create_table "algorithms", force: true do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.binary   "code"
+    t.text     "code"
     t.string   "privacy"
     t.datetime "created_at"
     t.datetime "updated_at"
