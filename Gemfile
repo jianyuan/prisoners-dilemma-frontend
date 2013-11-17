@@ -56,7 +56,7 @@ group :development do
 end
 
 # Services
-gem 'typhoeus'
+gem 'rest-client'
 
 # Sprocket
 gem 'haml-rails'

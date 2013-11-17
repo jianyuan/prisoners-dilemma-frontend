@@ -56,9 +56,9 @@ class AlgorithmsController < ApplicationController
     end
   end
 
-  # GET /algorithms/1/check_syntax
+  # GET /algorithms/1/check_syntax.js
   def check_syntax
-
+    @response = @algorithm.check_syntax
   end
 
   private

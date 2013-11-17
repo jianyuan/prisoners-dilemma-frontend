@@ -2,19 +2,32 @@
   .row.row-header
     .col-md-9
       .actions
-        = f.submit 'Save', disable_with: 'Saving...', class: 'btn btn-info btn-block'
+        = f.submit 'Save', disable_with: 'Saving...', class: 'btn btn-default btn-block'
       = f.text_area :code, class: 'hide'
       .actions
-        = f.submit 'Save', disable_with: 'Saving...', class: 'btn btn-info btn-block'
+        = f.submit 'Save', disable_with: 'Saving...', class: 'btn btn-default btn-block'
     .col-md-3
-      %fieldset
-        %legend Settings
-        = f.input :name
-        = f.input :privacy
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Settings
+        .panel-body
+          = f.input :name
+          = f.input :privacy
 
-      %fieldset
-        %legend Test
-        = link_to 'Check Syntax', '#'
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Test
+        .panel-body
+          = link_to 'Check Syntax', check_syntax_algorithm_path(@algorithm), remote: true, disable_with: 'Checking Syntax...', class: 'btn btn-info btn-block'
+          %div{:'data-syntax-checker-response' => true}
+
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Benchmark
+        .panel-body
+          = link_to 'Run', check_syntax_algorithm_path(@algorithm), remote: true, disable_with: 'Running...', class: 'btn btn-info btn-block'
+          %div{:'data-benchmark-response' => true}
+
 
       %hr/
 

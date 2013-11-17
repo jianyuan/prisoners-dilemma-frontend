@@ -19,4 +19,9 @@ class Algorithm < ActiveRecord::Base
 
   validates :name, presence: true
   validates :privacy, presence: true
+
+  def check_syntax
+    response = RestClient.post('http://localhost:5000/verify', source_code: self.code)
+    JSON.parse(response)
+  end
 end
