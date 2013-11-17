@@ -1,6 +1,6 @@
 class AlgorithmsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_algorithm, only: [:show, :edit, :update, :destroy, :check_syntax]
+  before_action :set_algorithm, only: [:show, :edit, :update, :destroy, :check_syntax, :benchmark]
   layout 'full_width', only: [:edit, :update]
 
   # GET /algorithms
@@ -61,6 +61,11 @@ class AlgorithmsController < ApplicationController
     @response = @algorithm.check_syntax
   end
 
+  # GET /algorithms/1/benchmark.js
+  def benchmark
+    @response = @algorithm.benchmark
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_algorithm
@@ -69,6 +74,6 @@ class AlgorithmsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def algorithm_params
-      params.require(:algorithm).permit(:user_id, :name, :code, :privacy)
+      params.require(:algorithm).permit(:name, :code, :privacy)
     end
 end

@@ -1,0 +1,97 @@
+<h4>Points</h4>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="text-right">Player</th>
+      <th>Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% $.each(points, function(i, player) { %>
+      <tr
+        <% if (player.id == winner) { %>
+          class="success"
+        <% } else if (player.id == algorithmId) { %>
+          class="warning"
+        <% } %>
+      >
+        <td class="text-right">
+
+          <% if (player.id == winner) { %><span class="glyphicon glyphicon-tower"></span><% } %>
+          <% if (player.id == algorithmId) { %><span class="glyphicon glyphicon-user"></span><% } %>
+
+          <% if (player.id == algorithmId) { %><strong><% } %>
+
+            <%- names[player.id] %>
+
+            <% if (player.id == algorithmId) { %>(Me)<% } %>
+
+          <% if (player.id == algorithmId) { %></strong><% } %>
+        </td>
+        <td>
+          <% if (player.id == algorithmId) { %><strong><% } %>
+            <%= player.points %>
+          <% if (player.id == algorithmId) { %></strong><% } %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<h4>Results</h4>
+<% $.each(results, function(i, result) { %>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <% if (result.players[0] == algorithmId) { %><span class="glyphicon glyphicon-user"></span><% } %>
+          <%- names[result.players[0]] %>
+          vs
+          <% if (result.players[1] == algorithmId) { %><span class="glyphicon glyphicon-user"></span><% } %>
+          <%- names[result.players[1]] %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="text-right">Iterations</td>
+        <td><%= result.iterations %></td>
+      </tr>
+      <tr
+        <% if (result.points[0] <= result.points[1]) { %>class="success"<% } %>
+      >
+        <td class="text-right">
+          <% if (result.points[0] <= result.points[1]) { %><span class="glyphicon glyphicon-tower"></span><% } %>
+          <%- names[result.players[0]] %> Points
+        </td>
+        <td><%= result.points[0] %></td>
+      </tr>
+      <tr
+        <% if (result.points[0] >= result.points[1]) { %>class="success"<% } %>
+      >
+        <td class="text-right">
+          <% if (result.points[0] >= result.points[1]) { %><span class="glyphicon glyphicon-tower"></span><% } %>
+          <%- names[result.players[1]] %> Points
+        </td>
+        <td><%= result.points[1] %></td>
+      </tr>
+    </tbody>
+    <thead>
+      <tr>
+        <th colspan="2" class="text-center">Moves</th>
+      </tr>
+      <tr>
+        <th class="col-sm-6 text-right"><%- names[result.players[0]] %></th>
+        <th class="col-sm-6"><%- names[result.players[1]] %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% $.each(result.moves, function(j, move) { %>
+        <tr>
+          <td class="text-right <% if (move[0] == 'D') { %>danger<% } else { %>success<% } %>"><%- move[0] %></td>
+          <td class="<% if (move[1] == 'D') { %>danger<% } else { %>success<% } %>"><%- move[1] %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% }) %>

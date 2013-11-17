@@ -2,6 +2,7 @@ CompetitionFactory::Application.routes.draw do
   resources :algorithms do
     member do
       get 'check_syntax'
+      get 'benchmark'
     end
   end
 

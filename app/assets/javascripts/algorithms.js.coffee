@@ -2,6 +2,7 @@ class AlgorithmEditor
   constructor: ->
     @initCodeMirror()
     @$syntaxCheckerResponse = $('[data-syntax-checker-response]')
+    @$benchmarkResponse = $('[data-benchmark-response]')
   initCodeMirror: ->
     cm = CodeMirror.fromTextArea($('#algorithm_code')[0],
       mode: 'python'
@@ -13,6 +14,10 @@ class AlgorithmEditor
     )
   handleSyntaxCheckerResponse: (data) ->
     @$syntaxCheckerResponse.html(JST['templates/syntax_checker_response'](data))
+
+  handleBenchmarkResponse: (data) ->
+    console.log data
+    @$benchmarkResponse.html(JST['templates/benchmark_response'](data))
 
 $ ->
   if $('body.algorithms.edit').length > 0
