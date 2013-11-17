@@ -1,5 +1,5 @@
 class AlgorithmsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:public]
   before_action :set_algorithm, only: [:show, :edit, :update, :destroy, :check_syntax, :benchmark, :copy]
   layout 'full_width', only: [:edit, :update]
 
@@ -39,6 +39,7 @@ class AlgorithmsController < ApplicationController
 
   # GET /algorithms/1/edit
   def edit
+    authorize! :update, @algorithm
   end
 
   # POST /algorithms
@@ -55,6 +56,7 @@ class AlgorithmsController < ApplicationController
   # PATCH/PUT /algorithms/1
   # PATCH/PUT /algorithms/1.json
   def update
+    authorize! :update, @algorithm
     respond_to do |format|
       if @algorithm.update(algorithm_params)
         format.html { redirect_to @algorithm, notice: 'Algorithm was successfully updated.' }
@@ -69,6 +71,7 @@ class AlgorithmsController < ApplicationController
   # DELETE /algorithms/1
   # DELETE /algorithms/1.json
   def destroy
+    authorize! :destroy, @algorithm
     @algorithm.destroy
     respond_to do |format|
       format.html { redirect_to algorithms_url }
