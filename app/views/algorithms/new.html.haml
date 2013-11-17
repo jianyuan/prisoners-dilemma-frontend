@@ -1,11 +1,6 @@
 .col-md-offset-4.col-md-4
+  %h1 New algorithm
   .well
-    %h1 New algorithm
-
     = simple_form_for @algorithm do |f|
       = f.input :name
-      = f.input :privacy, as: :radio_buttons, include_blank: false
-      %hr/
       = f.button :submit, class: 'btn btn-primary btn-block'
-
-    = link_to 'Back', algorithms_path, class: 'btn btn-link btn-block'

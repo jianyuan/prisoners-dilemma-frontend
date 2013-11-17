@@ -24,6 +24,6 @@
         Last updated
         = time_tag algorithm.updated_at, time_ago_in_words(algorithm.updated_at), title: algorithm.updated_at
         ago
-    = link_to edit_algorithm_path(algorithm), class: 'code-link' do
+    = link_to (can?(:edit, algorithm) ? edit_algorithm_path(algorithm) : algorithm), class: 'code-link' do
       %pre
         %code= algorithm.code

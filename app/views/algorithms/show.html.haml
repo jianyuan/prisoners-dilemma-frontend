@@ -29,25 +29,28 @@
     %pre
       %code= @algorithm.code
 
-  .page-header
-    %h2 Revision history
-  %table.table.table-bordered.table-hover
-    %thead
-      %tr
-        %th.text-right ID
-        %th Date/Time
-        %th User
-        %th Event
-    %tbody
-      - @algorithm.versions.order(created_at: :desc).where(event: :update).each do |version|
+  - if @algorithm.versions.where(event: :update).any?
+    .page-header
+      %h2 Revision history
+    %table.table.table-bordered.table-hover
+      %thead
         %tr
-          %td.text-right= link_to "#{version.id}.#{version.index}", algorithm_path(@algorithm, version_id: version)
-          %td= version.created_at
-          %td= User.find(version.whodunnit).email
-          %td= version.event.humanize
+          %th.text-right ID
+          %th Date/Time
+          %th User
+          %th Event
+      %tbody
+        - @algorithm.versions.order(created_at: :desc).where(event: :update).each do |version|
+          %tr
+            %td.text-right= link_to "#{version.id}.#{version.index}", algorithm_path(@algorithm, version_id: version)
+            %td= version.created_at
+            %td= User.find(version.whodunnit).email
+            %td= version.event.humanize
 
-  %footer
-    .actions
-      = link_to @algorithm, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } do
-        %span.glyphicon.glyphicon-remove
-        Delete
+  - if can? :manage, @algorithm
+    %footer
+      .actions
+        - if can? :destroy, @algorithm
+          = link_to @algorithm, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } do
+            %span.glyphicon.glyphicon-remove
+            Delete

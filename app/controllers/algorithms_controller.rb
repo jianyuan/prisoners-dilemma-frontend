@@ -1,5 +1,5 @@
 class AlgorithmsController < ApplicationController
-  before_action :authenticate_user!, except: [:public]
+  before_action :authenticate_user!, except: [:public, :show]
   before_action :set_algorithm, only: [:show, :edit, :update, :destroy, :check_syntax, :benchmark, :copy]
   layout 'full_width', only: [:edit, :update]
 

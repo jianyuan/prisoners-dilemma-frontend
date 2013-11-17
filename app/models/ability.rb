@@ -10,10 +10,16 @@ class Ability
       can :manage, Algorithm
     end
 
-    # User can manage his own algorithms
-    can :manage, Algorithm, user_id: user.id
+    if user.persisted?
+      # User can copy public algorithms
+      can :copy, Algorithm, privacy: 'public'
 
-    # User can copy public algorithms
-    can :copy, Algorithm, privacy: 'public'
+      # User can manage his own algorithms
+      can :manage, Algorithm, user_id: user.id
+    end
+
+    # Guest can view public algorithms
+    can :read, Algorithm, privacy: 'public'
+
   end
 end
