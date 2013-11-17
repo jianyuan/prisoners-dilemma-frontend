@@ -1,0 +1,26 @@
+.page-header
+  %h1 My Algorithms
+
+%table
+  %tr
+    %th User
+    %th Name
+    %th Code
+    %th Privacy
+    %th
+    %th
+    %th
+
+  - @algorithms.each do |algorithm|
+    %tr
+      %td= algorithm.user
+      %td= algorithm.name
+      %td= algorithm.code
+      %td= algorithm.privacy
+      %td= link_to 'Show', algorithm
+      %td= link_to 'Edit', edit_algorithm_path(algorithm)
+      %td= link_to 'Destroy', algorithm, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Algorithm', new_algorithm_path

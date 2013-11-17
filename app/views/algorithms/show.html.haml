@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @algorithm.user
+%p
+  %b Name:
+  = @algorithm.name
+%p
+  %b Code:
+  = @algorithm.code
+%p
+  %b Privacy:
+  = @algorithm.privacy
+
+= link_to 'Edit', edit_algorithm_path(@algorithm)
+\|
+= link_to 'Back', algorithms_path

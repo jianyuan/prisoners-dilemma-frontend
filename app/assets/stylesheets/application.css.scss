@@ -9,5 +9,21 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require codemirror
+ *= require codemirror/themes/monokai
  *= require_tree .
  */
+
+$border-radius-base: 0;
+$border-radius-large: 0;
+$border-radius-small: 0;
+$font-family-sans-serif: 'Open Sans', sans-serif;
+@import "twitter/bootstrap";
+
+body {
+  padding-top: 70px;
+}
+
+.container-full-width {
+  width: 100%;
+}

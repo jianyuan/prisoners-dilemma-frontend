@@ -1,0 +1,13 @@
+.CodeMirror {
+  height: 500px;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+form.edit_algorithm {
+  .actions {
+    text-align: right;
+  }
+}

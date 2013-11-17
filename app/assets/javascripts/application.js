@@ -13,4 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require twitter/bootstrap
+//= require codemirror
+//= require codemirror/modes/python
+//= require jquery.netchanger
+//= require jquery.safetynet
 //= require_tree .

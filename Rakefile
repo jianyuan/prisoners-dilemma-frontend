@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-RailsFrontend::Application.load_tasks
+CompetitionFactory::Application.load_tasks

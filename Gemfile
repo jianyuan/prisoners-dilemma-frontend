@@ -55,6 +55,9 @@ group :development do
   gem 'annotate', '>=2.5.0'
 end
 
+# Services
+gem 'typhoeus'
+
 # Sprocket
 gem 'haml-rails'
 gem 'ejs'
@@ -65,6 +68,7 @@ gem 'cancan'
 
 # ActiveRecord
 gem 'state_machine'
+gem 'enumerize'
 
 # View helpers
 gem 'simple_form'

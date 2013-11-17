@@ -63,6 +63,8 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     ejs (1.1.1)
+    enumerize (0.7.0)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     execjs (2.0.2)
     ffi (1.9.3)
@@ -196,6 +198,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   ejs
+  enumerize
   guard
   guard-annotate
   guard-bundler

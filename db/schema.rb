@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131117000257) do
+ActiveRecord::Schema.define(version: 20131117004724) do
+
+  create_table "algorithms", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.binary   "code"
+    t.string   "privacy"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "algorithms", ["user_id"], name: "index_algorithms_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

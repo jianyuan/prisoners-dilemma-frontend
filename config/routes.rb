@@ -1,5 +1,13 @@
-RailsFrontend::Application.routes.draw do
+CompetitionFactory::Application.routes.draw do
+  resources :algorithms do
+    member do
+      get 'check_syntax'
+    end
+  end
+
   devise_for :users
+
+  root 'algorithms#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
