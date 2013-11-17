@@ -26,6 +26,10 @@ class AlgorithmsController < ApplicationController
 
   # GET /algorithms/1
   def show
+    if params[:version_id].present?
+      @version = @algorithm.versions.find(params[:version_id])
+      @algorithm = @version.reify
+    end
   end
 
   # GET /algorithms/new
@@ -93,6 +97,7 @@ class AlgorithmsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_algorithm
       @algorithm = Algorithm.find(params[:id])
+      authorize! :read, @algorithm
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

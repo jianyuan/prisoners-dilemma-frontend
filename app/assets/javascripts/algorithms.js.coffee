@@ -19,7 +19,7 @@ class AlgorithmEditor
     console.log data
     @$benchmarkResponse.html(JST['templates/benchmark_response'](data))
 
-$(document).ready ->
+$ ->
   if $('body.algorithms.edit').length > 0
     window.algorithmEditor = new AlgorithmEditor
 

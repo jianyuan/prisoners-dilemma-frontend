@@ -2,23 +2,23 @@
   .row.row-header
     .col-md-9
       .actions
-        = f.submit 'Save', disable_with: 'Saving...', class: 'btn btn-default btn-block'
+        = f.submit 'Save', data: { disable_with: 'Saving...' }, class: 'btn btn-default btn-block'
       = f.text_area :code, class: 'hide'
       .actions
-        = f.submit 'Save', disable_with: 'Saving...', class: 'btn btn-default btn-block'
+        = f.submit 'Save', data: { disable_with: 'Saving...' }, class: 'btn btn-default btn-block'
     .col-md-3
       .panel.panel-default
         .panel-heading
           %h3.panel-title Test
         .panel-body
-          = link_to 'Check Syntax', check_syntax_algorithm_path(@algorithm), remote: true, disable_with: 'Checking Syntax...', class: 'btn btn-info btn-block'
+          = link_to 'Check Syntax', check_syntax_algorithm_path(@algorithm), remote: true, data: { disable_with: 'Checking Syntax...' }, class: 'btn btn-info btn-block'
           %div{:'data-syntax-checker-response' => true}
 
       .panel.panel-default
         .panel-heading
           %h3.panel-title Benchmark
         .panel-body
-          = link_to 'Run', benchmark_algorithm_path(@algorithm), remote: true, disable_with: 'Running...', class: 'btn btn-info btn-block'
+          = link_to 'Run', benchmark_algorithm_path(@algorithm), remote: true, data: { disable_with: 'Running...' }, class: 'btn btn-info btn-block'
           %div{:'data-benchmark-response' => true}
 
       .panel.panel-default
@@ -28,12 +28,9 @@
           = f.input :name
           = f.input :privacy
 
-
       %hr/
 
-      = link_to 'Show', @algorithm
-      \|
-      = link_to 'Back', algorithms_path
+      = link_to 'View History', @algorithm, class: 'btn btn-default btn-sm'
 
 :javascript
   window.algorithmId = #{@algorithm.id};

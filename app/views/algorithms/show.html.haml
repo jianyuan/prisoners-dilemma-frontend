@@ -1,18 +1,53 @@
-%p#notice= notice
+%article.algorithm-item
+  %header
+    = image_tag avatar_url(@algorithm.user, 36), class: 'avatar', width: 36, height: 36
+    .actions
+      - if can? :edit, @algorithm
+        = link_to edit_algorithm_path(@algorithm), class: 'btn btn-default' do
+          %span.glyphicon.glyphicon-pencil
+          Edit
+      - if can? :copy, @algorithm
+        = link_to copy_algorithm_path(@algorithm), class: 'btn btn-default', method: :post do
+          %span.glyphicon.glyphicon-retweet
+          Copy
+    %h4.name
+      = link_to @algorithm.user.username, '#'
+      \/
+      = link_to @algorithm do
+        - if @algorithm.public?
+          %span.glyphicon.glyphicon-eye-open
+        = @algorithm.name
+    %small.text-muted
+      Last updated
+      = time_tag @algorithm.updated_at, time_ago_in_words(@algorithm.updated_at), title: @algorithm.updated_at
+      ago
+  - if @version
+    .alert.alert-info
+      %strong This is version #{@version.id}.#{@version.index}.
+      = link_to 'View latest', @algorithm, class: 'btn btn-primary btn-sm'
+  = link_to edit_algorithm_path(@algorithm), class: 'code-link' do
+    %pre
+      %code= @algorithm.code
 
-%p
-  %b User:
-  = @algorithm.user
-%p
-  %b Name:
-  = @algorithm.name
-%p
-  %b Code:
-  = @algorithm.code
-%p
-  %b Privacy:
-  = @algorithm.privacy
+  .page-header
+    %h2 Revision history
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th.text-right ID
+        %th Date/Time
+        %th User
+        %th Event
+    %tbody
+      - @algorithm.versions.order(created_at: :desc).where(event: :update).each do |version|
+        %tr
+          %td.text-right= link_to "#{version.id}.#{version.index}", algorithm_path(@algorithm, version_id: version)
+          %td= version.created_at
+          %td= User.find(version.whodunnit).email
+          %td= version.event.humanize
 
-= link_to 'Edit', edit_algorithm_path(@algorithm)
-\|
-= link_to 'Back', algorithms_path
+  %footer
+    .actions
+      = link_to @algorithm, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } do
+        %span.glyphicon.glyphicon-remove
+        Delete

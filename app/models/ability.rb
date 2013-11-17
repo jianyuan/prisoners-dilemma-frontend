@@ -10,7 +10,10 @@ class Ability
       can :manage, Algorithm
     end
 
-    can :copy, Algorithm, user_id: user.id
+    # User can manage his own algorithms
+    can :manage, Algorithm, user_id: user.id
+
+    # User can copy public algorithms
     can :copy, Algorithm, privacy: 'public'
   end
 end

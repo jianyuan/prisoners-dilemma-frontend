@@ -2,18 +2,20 @@
 #
 # Table name: algorithms
 #
-#  id                :integer          not null, primary key
-#  user_id           :integer
-#  name              :string(255)
-#  code              :text
-#  privacy           :string(255)
-#  created_at        :datetime
-#  updated_at        :datetime
-#  benchmark_against :boolean          default(FALSE)
+#  id                    :integer          not null, primary key
+#  user_id               :integer
+#  name                  :string(255)
+#  code                  :text
+#  privacy               :string(255)
+#  created_at            :datetime
+#  updated_at            :datetime
+#  benchmark_against     :boolean          default(FALSE)
+#  original_algorithm_id :integer
 #
 
 class Algorithm < ActiveRecord::Base
   belongs_to :user
+  belongs_to :original_algorithm, class_name: 'Algorithm'
 
   extend Enumerize
   enumerize :privacy, in: [:public, :private], default: :private, predicates: true, scope: true
@@ -62,6 +64,7 @@ class Algorithm < ActiveRecord::Base
 
   def copy_to_user(user)
     new_algorithm = user.algorithms.new
+    new_algorithm.original_algorithm = self
     new_algorithm.name = self.name
     new_algorithm.code = self.code
     new_algorithm.save!

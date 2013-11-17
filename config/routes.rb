@@ -7,7 +7,7 @@ CompetitionFactory::Application.routes.draw do
     member do
       get 'check_syntax'
       get 'benchmark'
-      get 'copy'
+      post 'copy'
     end
   end
 

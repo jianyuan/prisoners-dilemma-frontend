@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131117224648) do
+ActiveRecord::Schema.define(version: 20131117225346) do
 
   create_table "algorithms", force: true do |t|
     t.integer  "user_id"
@@ -20,9 +20,11 @@ ActiveRecord::Schema.define(version: 20131117224648) do
     t.string   "privacy"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "benchmark_against", default: false
+    t.boolean  "benchmark_against",     default: false
+    t.integer  "original_algorithm_id"
   end
 
+  add_index "algorithms", ["original_algorithm_id"], name: "index_algorithms_on_original_algorithm_id"
   add_index "algorithms", ["user_id"], name: "index_algorithms_on_user_id"
 
   create_table "users", force: true do |t|
