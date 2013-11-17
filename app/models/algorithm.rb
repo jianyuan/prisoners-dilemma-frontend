@@ -16,12 +16,13 @@ class Algorithm < ActiveRecord::Base
   belongs_to :user
 
   extend Enumerize
-  enumerize :privacy, in: [:public, :private], default: :private
+  enumerize :privacy, in: [:public, :private], default: :private, predicates: true, scope: true
 
   validates :name, presence: true
   validates :privacy, presence: true
 
   scope :benchmarkable, -> { where(benchmark_against: true) }
+  scope :latest, -> { order(updated_at: :desc) }
 
   def to_param
     "#{self.id}-#{self.name.parameterize}"
@@ -55,5 +56,14 @@ class Algorithm < ActiveRecord::Base
     response['names'] = names
 
     response
+  end
+
+  def copy_to_user(user)
+    new_algorithm = user.algorithms.new
+    new_algorithm.name = self.name
+    new_algorithm.code = self.code
+    new_algorithm.save!
+
+    new_algorithm
   end
 end

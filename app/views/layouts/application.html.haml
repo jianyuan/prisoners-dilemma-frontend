@@ -14,7 +14,8 @@
     .navbar.navbar-fixed-top.navbar-inverse{:role => 'navigation'}
       = link_to 'Competition Factory', root_path, class: 'navbar-brand'
       %ul.nav.navbar-nav
-        %li= link_to 'Algorithms', algorithms_path
+        %li= link_to 'Public Algorithms', public_algorithms_path
+        %li= link_to 'My Algorithms', algorithms_path
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li= link_to current_user.email, '#'

@@ -1,11 +1,27 @@
 class AlgorithmsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_algorithm, only: [:show, :edit, :update, :destroy, :check_syntax, :benchmark]
+  before_action :set_algorithm, only: [:show, :edit, :update, :destroy, :check_syntax, :benchmark, :copy]
   layout 'full_width', only: [:edit, :update]
 
   # GET /algorithms
   def index
-    @algorithms = current_user.algorithms.all
+    @page_title = 'My Algorithms'
+    @algorithms = current_user.algorithms.latest.all
+  end
+
+  # GET /algorithms/all
+  def all
+    authorize! :manage, Algorithm
+    @page_title = 'All Algorithms'
+    @algorithms = Algorithm.latest.all
+    render action: 'index'
+  end
+
+  # GET /algorithms/public
+  def public
+    @page_title = 'Public Algorithms'
+    @algorithms = Algorithm.with_privacy(:public).latest.all
+    render action: 'index'
   end
 
   # GET /algorithms/1
@@ -64,6 +80,13 @@ class AlgorithmsController < ApplicationController
   # GET /algorithms/1/benchmark.js
   def benchmark
     @response = @algorithm.benchmark
+  end
+
+  # GET /algorithms/1/copy
+  def copy
+    authorize! :copy, @algorithm
+    new_algorithm = @algorithm.copy_to_user(current_user)
+    redirect_to edit_algorithm_path(new_algorithm)
   end
 
   private

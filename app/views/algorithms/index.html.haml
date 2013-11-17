@@ -1,38 +1,28 @@
 .page-header
-  %h1 My Algorithms
+  = link_to new_algorithm_path, class: 'btn btn-lg btn-primary pull-right' do
+    %span.glyphicon.glyphicon-plus
+    Create New
+  %h1= @page_title
 
 - @algorithms.each do |algorithm|
   %article.algorithm-item
     %header
-      = image_tag avatar_url(algorithm.user, 20), class: 'avatar', width: 20, height: 20
-      %h4
+      = image_tag avatar_url(algorithm.user, 36), class: 'avatar', width: 36, height: 36
+      .actions
+        = link_to copy_algorithm_path(algorithm), class: 'btn btn-default' do
+          %span.glyphicon.glyphicon-retweet
+          Copy
+      %h4.name
         = link_to algorithm.user.username, '#'
         \/
-        = link_to algorithm.name, algorithm
-    = link_to algorithm, class: 'code-link' do
+        = link_to algorithm do
+          - if algorithm.public?
+            %span.glyphicon.glyphicon-eye-open
+          = algorithm.name
+      %small.text-muted
+        Last updated
+        = time_tag algorithm.updated_at, time_ago_in_words(algorithm.updated_at), title: algorithm.updated_at
+        ago
+    = link_to edit_algorithm_path(algorithm), class: 'code-link' do
       %pre
         %code= algorithm.code
-
-%table
-  %tr
-    %th User
-    %th Name
-    %th Code
-    %th Privacy
-    %th
-    %th
-    %th
-
-  - @algorithms.each do |algorithm|
-    %tr
-      %td= algorithm.user
-      %td= algorithm.name
-      %td= algorithm.code
-      %td= algorithm.privacy
-      %td= link_to 'Show', algorithm
-      %td= link_to 'Edit', edit_algorithm_path(algorithm)
-      %td= link_to 'Destroy', algorithm, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Algorithm', new_algorithm_path

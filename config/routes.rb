@@ -1,8 +1,13 @@
 CompetitionFactory::Application.routes.draw do
   resources :algorithms do
+    collection do
+      get 'all'
+      get 'public'
+    end
     member do
       get 'check_syntax'
       get 'benchmark'
+      get 'copy'
     end
   end
 

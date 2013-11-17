@@ -1,8 +1,17 @@
 .algorithm-item {
   margin-bottom: 30px;
+  header {
+    margin-bottom: 5px;
+    .name {
+      margin-bottom: 0;
+    }
+  }
   .avatar {
     float: left;
     margin-right: 5px;
+  }
+  .actions {
+    float: right;
   }
   a.code-link {
     &:hover {
