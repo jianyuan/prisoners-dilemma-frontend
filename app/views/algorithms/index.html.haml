@@ -4,13 +4,14 @@
 - @algorithms.each do |algorithm|
   %article.algorithm-item
     %header
-      = image_tag avatar_url(algorithm.user, 50)
+      = image_tag avatar_url(algorithm.user, 20), class: 'avatar', width: 20, height: 20
       %h4
         = link_to algorithm.user.username, '#'
         \/
-        = algorithm.name
-    %pre
-      %code= algorithm.code
+        = link_to algorithm.name, algorithm
+    = link_to algorithm, class: 'code-link' do
+      %pre
+        %code= algorithm.code
 
 %table
   %tr

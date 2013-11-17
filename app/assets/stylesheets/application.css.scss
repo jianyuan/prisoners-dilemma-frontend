@@ -11,8 +11,7 @@
  *= require_self
  *= require codemirror
  *= require codemirror/themes/monokai
- *= require highlight.monokai_sublime
- *= require_tree .
+ *= require highlight.default
  */
 
 $border-radius-base: 0;
@@ -26,6 +25,12 @@ body {
   padding-top: 70px;
 }
 
+pre {
+  padding: 0;
+}
+
 .container-full-width {
   width: 100%;
 }
+
+@import "algorithms";

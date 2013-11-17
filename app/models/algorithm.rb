@@ -23,6 +23,10 @@ class Algorithm < ActiveRecord::Base
 
   scope :benchmarkable, -> { where(benchmark_against: true) }
 
+  def to_param
+    "#{self.id}-#{self.name.parameterize}"
+  end
+
   def check_syntax
     response = RestClient.post('http://localhost:5000/verify', source_code: self.code)
     JSON.parse(response)

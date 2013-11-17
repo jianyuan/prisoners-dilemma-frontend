@@ -1,4 +1,21 @@
 .algorithm-item {
+  margin-bottom: 30px;
+  .avatar {
+    float: left;
+    margin-right: 5px;
+  }
+  a.code-link {
+    &:hover {
+      text-decoration: none;
+      pre {
+        border-color: #66afe9;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+      }
+    }
+  }
 }
 
 .CodeMirror {
