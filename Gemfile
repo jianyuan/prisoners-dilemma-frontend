@@ -72,6 +72,7 @@ gem 'cancan'
 # ActiveRecord
 gem 'state_machine'
 gem 'enumerize'
+gem 'paper_trail', '>= 3.0.0.rc2'
 
 # View helpers
 gem 'simple_form'

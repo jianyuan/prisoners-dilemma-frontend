@@ -18,6 +18,8 @@ class Algorithm < ActiveRecord::Base
   extend Enumerize
   enumerize :privacy, in: [:public, :private], default: :private, predicates: true, scope: true
 
+  has_paper_trail only: [:name, :code]
+
   validates :name, presence: true
   validates :privacy, presence: true
 
