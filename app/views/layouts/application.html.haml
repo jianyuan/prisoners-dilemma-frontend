@@ -25,10 +25,16 @@
           %li= link_to 'Sign In', user_omniauth_authorize_path(provider: :eesoc)
           -#%li= link_to 'Sign Up', new_user_registration_path
           -#%li= link_to 'Sign In', new_user_session_path
-    - if content_for? :container
-      = yield :container
-    - else
+
+    .site-body
+      - if content_for? :container
+        = yield :container
+      - else
+        .container
+          = bootstrap_flash
+          = yield
+    %footer.site-footer
       .container
-        = bootstrap_flash
-        = yield
+        %p &copy; 2013 Imperial College Electrical Engineering Society.
+        %p Code by #{mail_to('jian.lee11@imperial.ac.uk', 'Jian Yuan Lee')}.
     = javascript_include_tag "application", "data-turbolinks-track" => true, "data-turbolinks-eval" => false
