@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
       user ||= User.where(ic_username: auth.uid).first
 
       # Try email
-      user ||= User.where(email: auth.email).first
+      user ||= User.where(email: auth.info.email).first
 
       user_hash = {
         ic_username: auth.uid,

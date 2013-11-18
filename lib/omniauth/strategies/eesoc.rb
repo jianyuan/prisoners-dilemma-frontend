@@ -5,8 +5,6 @@ module OmniAuth
     class EESoc < OmniAuth::Strategies::OAuth2
       option :name, 'eesoc'
 
-      # This is where you pass the options you would pass when
-      # initializing your consumer from the OAuth gem.
       option :client_options, {
         :site          => 'https://eesoc.com',
         :authorize_url => '/oauth/authorize',
@@ -18,11 +16,6 @@ module OmniAuth
       #   :param_name => 'access_token'
       # }
 
-      # These are called after authentication has succeeded. If
-      # possible, you should try to set the UID without making
-      # additional calls (if the user id is returned with the token
-      # or as a URI parameter). This may not be possible with all
-      # providers.
       uid { raw_info['username'] }
 
       info do
