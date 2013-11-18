@@ -62,6 +62,9 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dotenv (0.9.0)
+    dotenv-rails (0.9.0)
+      dotenv (= 0.9.0)
     ejs (1.1.1)
     enumerize (0.7.0)
       activesupport (>= 3.2)
@@ -225,6 +228,7 @@ DEPENDENCIES
   codemirror-rails
   coffee-rails (~> 4.0.0)
   devise
+  dotenv-rails
   ejs
   enumerize
   guard

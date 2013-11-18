@@ -60,6 +60,8 @@ group :development do
   gem 'annotate', '>=2.5.0'
 end
 
+gem 'dotenv-rails'
+
 # Services
 gem 'rest-client'
 
