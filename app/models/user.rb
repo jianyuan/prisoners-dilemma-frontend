@@ -16,6 +16,9 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  admin                  :boolean          default(FALSE)
+#  ic_username            :string(255)
+#  name                   :string(255)
+#  description            :text
 #
 
 class User < ActiveRecord::Base
@@ -24,10 +27,37 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:eesoc]
 
   def username
     self.email.split('@')[0]
+  end
+
+  class << self
+    def find_for_imperial_oauth(auth, user = nil)
+      # Try IC username
+      user ||= User.where(ic_username: auth.uid).first
+
+      # Try email
+      user ||= User.where(email: auth.email).first
+
+      user_hash = {
+        ic_username: auth.uid,
+        name: auth.info.name,
+        email: auth.info.email,
+        description: auth.info.description,
+        admin: auth.extra.raw_info.admin
+      }
+
+      if user
+        user.update_attributes(user_hash)
+      else
+        user = User.create({ password: Devise.friendly_token[0,20] }.merge(user_hash))
+      end
+
+      user
+    end
   end
 
 end

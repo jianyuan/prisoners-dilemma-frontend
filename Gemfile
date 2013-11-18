@@ -70,6 +70,8 @@ gem 'ejs'
 # Auth
 gem 'devise'
 gem 'cancan'
+gem 'omniauth'
+gem 'omniauth-oauth2'
 
 # ActiveRecord
 gem 'state_machine'
