@@ -1,0 +1,8 @@
+.page-header
+  = image_tag avatar_url(@user, 50), class: 'user-avatar', width: 50, height: 50
+  %h1
+    = @user.name
+    %small
+      %span.label.label-info Admin
+
+= simple_format @user.description, class: 'well'

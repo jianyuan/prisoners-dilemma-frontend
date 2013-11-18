@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
     read_attribute(:name) || self.ic_username || self.email.split('@')[0]
   end
 
+  def to_param
+    "#{self.id}-#{self.name.parameterize}"
+  end
+
   class << self
     def find_for_imperial_oauth(auth, user = nil)
       # Try IC username
