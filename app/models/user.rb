@@ -30,8 +30,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:eesoc]
 
-  def username
-    self.email.split('@')[0]
+  def name
+    read_attribute(:name) || self.ic_username || self.email.split('@')[0]
   end
 
   class << self
