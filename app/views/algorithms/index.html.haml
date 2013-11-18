@@ -7,7 +7,7 @@
 - @algorithms.each do |algorithm|
   %article.algorithm-item
     %header
-      = image_tag avatar_url(algorithm.user, 36), class: 'avatar', width: 36, height: 36
+      = image_tag algorithm.user.avatar_url(36), alt: algorithm.user.name, class: 'avatar', width: 36, height: 36
       .actions
         - if can? :copy, algorithm
           = link_to copy_algorithm_path(algorithm), class: 'btn btn-default', method: :post do

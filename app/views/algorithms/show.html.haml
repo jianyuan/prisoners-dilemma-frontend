@@ -1,6 +1,6 @@
 %article.algorithm-item
   %header
-    = image_tag avatar_url(@algorithm.user, 36), class: 'avatar', width: 36, height: 36
+    = image_tag @user.avatar_url(36), alt: @user.name, class: 'avatar', width: 36, height: 36
     .actions
       - if can? :edit, @algorithm
         = link_to edit_algorithm_path(@algorithm), class: 'btn btn-default' do
@@ -25,9 +25,13 @@
     .alert.alert-info
       %strong This is version #{@version.id}.#{@version.index}.
       = link_to 'View latest', @algorithm, class: 'btn btn-primary btn-sm'
-  = link_to edit_algorithm_path(@algorithm), class: 'code-link' do
+  - if @version
     %pre
       %code= @algorithm.code
+  - else
+    = link_to edit_algorithm_path(@algorithm), class: 'code-link' do
+      %pre
+        %code= @algorithm.code
 
   - if @algorithm.versions.where(event: :update).any?
     .page-header
