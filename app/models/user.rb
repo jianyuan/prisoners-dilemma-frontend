@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
     "#{self.id}-#{self.name.parameterize}"
   end
 
+  def avatar_url(size = 50)
+    Identicon.data_url_for(self.id, size)
+  end
+
   class << self
     def find_for_imperial_oauth(auth, user = nil)
       # Try IC username

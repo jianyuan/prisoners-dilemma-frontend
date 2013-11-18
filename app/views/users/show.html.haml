@@ -1,5 +1,5 @@
 .page-header
-  = image_tag avatar_url(@user, 50), class: 'user-avatar', width: 50, height: 50
+  = image_tag @user.avatar_url(50), alt: @user.name, class: 'user-avatar', width: 50, height: 50
   %h1
     = @user.name
     %small

@@ -85,3 +85,4 @@ gem 'simple_form'
 gem 'codemirror-rails'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :github => 'anjlab/bootstrap-rails'
+gem 'identicon'
