@@ -34,11 +34,11 @@
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
-        <th colspan="2">
-          <% if (result.players[0] == algorithmId) { %><span class="glyphicon glyphicon-user"></span><% } %>
-          <%- names[result.players[0]] %>
-          vs
-          <% if (result.players[1] == algorithmId) { %><span class="glyphicon glyphicon-user"></span><% } %>
+        <th colspan="2" class="text-center">
+          <% if (result.players[0] == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
+          <%- names[result.players[0]] %><br>
+          vs<br>
+          <% if (result.players[1] == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
           <%- names[result.players[1]] %>
         </th>
       </tr>
@@ -49,19 +49,19 @@
         <td><%= result.iterations %></td>
       </tr>
       <tr
-        <% if (result.points[0] <= result.points[1]) { %>class="success"<% } %>
+        <% if (result.points[0] >= result.points[1]) { %>class="success"<% } %>
       >
         <td class="text-right">
-          <% if (result.points[0] <= result.points[1]) { %><span class="glyphicon glyphicon-tower"></span><% } %>
+          <% if (result.points[0] >= result.points[1]) { %><span class="glyphicon glyphicon-tower"></span><% } %>
           <%- names[result.players[0]] %> Points
         </td>
         <td><%= result.points[0] %></td>
       </tr>
       <tr
-        <% if (result.points[0] >= result.points[1]) { %>class="success"<% } %>
+        <% if (result.points[0] <= result.points[1]) { %>class="success"<% } %>
       >
         <td class="text-right">
-          <% if (result.points[0] >= result.points[1]) { %><span class="glyphicon glyphicon-tower"></span><% } %>
+          <% if (result.points[0] <= result.points[1]) { %><span class="glyphicon glyphicon-tower"></span><% } %>
           <%- names[result.players[1]] %> Points
         </td>
         <td><%= result.points[1] %></td>
@@ -79,8 +79,24 @@
     <tbody>
       <% $.each(result.moves, function(j, move) { %>
         <tr>
-          <td class="text-right <% if (move[0] == 'D') { %>danger<% } else { %>success<% } %>"><%- move[0] %></td>
-          <td class="<% if (move[1] == 'D') { %>danger<% } else { %>success<% } %>"><%- move[1] %></td>
+          <% for (var i = 0; i < 2; i++) { %>
+            <td class="
+              <% if (move[i] == 'D') { %>
+                danger
+              <% } else if (move[i] == 'C') { %>
+                success
+              <% } else { %>
+                warning
+              <% } %>
+            ">
+              <% if (move[i]) { %>
+                <%- move[i] %>
+              <% } else { %>
+                <em>Invalid</em>
+              <% } %>
+              (<%= result.move_points[j][i] %>)
+            </td>
+          <% } %>
         </tr>
       <% }) %>
     </tbody>
