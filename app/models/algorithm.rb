@@ -48,7 +48,7 @@ class Algorithm < ActiveRecord::Base
       source_codes[algorithm.id] = algorithm.code
     end
 
-    json_response = RestClient.post('http://localhost:5000/round_robin', source_codes: source_codes.to_json)
+    json_response = RestClient.post('http://localhost:5000/round_robin', source_codes: source_codes.to_json, iterations: 100)
     response = JSON.parse(json_response)
 
     response['points'] = response['points'].sort_by { |_, value| value }.map do |row|

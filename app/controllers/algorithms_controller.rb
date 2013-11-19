@@ -6,21 +6,21 @@ class AlgorithmsController < ApplicationController
   # GET /algorithms
   def index
     @page_title = 'My Algorithms'
-    @algorithms = current_user.algorithms.latest.all
+    @algorithms = current_user.algorithms.latest
   end
 
   # GET /algorithms/all
   def all
     authorize! :manage, Algorithm
     @page_title = 'All Algorithms'
-    @algorithms = Algorithm.latest.all
+    @algorithms = Algorithm.latest.includes(:user)
     render action: 'index'
   end
 
   # GET /algorithms/public
   def public
     @page_title = 'Public Algorithms'
-    @algorithms = Algorithm.with_privacy(:public).latest.all
+    @algorithms = Algorithm.with_privacy(:public).includes(:user).latest
     render action: 'index'
   end
 
@@ -79,14 +79,14 @@ class AlgorithmsController < ApplicationController
     end
   end
 
-  # GET /algorithms/1/check_syntax.js
+  # GET /algorithms/1/check_syntax.json
   def check_syntax
-    @response = @algorithm.check_syntax
+    render json: @algorithm.check_syntax
   end
 
-  # GET /algorithms/1/benchmark.js
+  # GET /algorithms/1/benchmark.json
   def benchmark
-    @response = @algorithm.benchmark
+    render json: @algorithm.benchmark
   end
 
   # GET /algorithms/1/copy

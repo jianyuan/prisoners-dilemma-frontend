@@ -1,24 +1,28 @@
 = simple_form_for @algorithm, remote: true do |f|
   .row.row-header
     .col-md-9
-      .actions
-        = f.submit 'Save', data: { disable_with: 'Saving...' }, class: 'btn btn-default btn-block'
       = f.text_area :code, class: 'hide'
       .actions
-        = f.submit 'Save', data: { disable_with: 'Saving...' }, class: 'btn btn-default btn-block'
+        = button_tag data: { disable_with: 'Saving...' }, class: 'btn btn-primary btn-lg' do
+          %span.glyphicon.glyphicon-floppy-disk
+          Save
     .col-md-3
       .panel.panel-default
         .panel-heading
           %h3.panel-title Test
         .panel-body
-          = link_to 'Check Syntax', check_syntax_algorithm_path(@algorithm), remote: true, data: { disable_with: 'Checking Syntax...' }, class: 'btn btn-info btn-block'
+          = link_to check_syntax_algorithm_path(@algorithm), data: { action: 'check-syntax', remote: true, disable_with: 'Checking Syntax...' }, class: 'btn btn-primary btn-block' do
+            %span.glyphicon.glyphicon-play
+            Run
           %div{:'data-syntax-checker-response' => true}
 
       .panel.panel-default
         .panel-heading
           %h3.panel-title Benchmark
         .panel-body
-          = link_to 'Run', benchmark_algorithm_path(@algorithm), remote: true, data: { disable_with: 'Running...' }, class: 'btn btn-info btn-block'
+          = link_to benchmark_algorithm_path(@algorithm), data: { action: 'benchmark', remote: true, disable_with: 'Running...' }, class: 'btn btn-primary btn-block' do
+            %span.glyphicon.glyphicon-play
+            Run
           %div{:'data-benchmark-response' => true}
 
       .panel.panel-default
@@ -26,8 +30,8 @@
           %h3.panel-title Settings
         .panel-body
           = f.input :name
-          = f.input :privacy
-
+          -# = f.input :privacy
+          = f.submit 'Save', data: { disable_with: 'Saving...' }, class: 'btn btn-default'
       %hr/
 
       = link_to 'View History', @algorithm, class: 'btn btn-default btn-sm'

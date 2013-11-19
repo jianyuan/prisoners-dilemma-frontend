@@ -28,6 +28,9 @@ body {
 
 pre {
   padding: 0;
+  &.with-padding {
+    padding: 9.5px;
+  }
 }
 
 .container-full-width {

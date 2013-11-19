@@ -1,10 +1,16 @@
-<h3>
+<hr>
+<h4>
   <% if (success) { %>
     <span class="label label-success">Success!</span>
   <% } else { %>
     <span class="label label-danger">Error!</span>
   <% } %>
-</h3>
+</h4>
+<hr>
 <% if (errors.length) { %>
-  <pre><%- errors %></pre>
+  <pre class="with-padding"><%- errors %></pre>
+<% } %>
+<% if (output) { %>
+  <h4>Output</h4>
+  <pre class="with-padding"><%- output %></pre>
 <% } %>
