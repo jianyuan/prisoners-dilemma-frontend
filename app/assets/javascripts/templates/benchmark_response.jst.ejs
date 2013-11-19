@@ -8,23 +8,14 @@
   </thead>
   <tbody>
     <% $.each(points, function(i, player) { %>
-      <tr
-        <% if (player.id == winner) { %>
-          class="success"
-        <% } else if (player.id == algorithmId) { %>
-          class="warning"
-        <% } %>
-      >
+      <tr>
         <td class="text-right">
 
-          <% if (player.id == winner) { %><span class="glyphicon glyphicon-tower"></span><% } %>
-          <% if (player.id == algorithmId) { %><span class="glyphicon glyphicon-user"></span><% } %>
+          <% if (player.id == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
 
           <% if (player.id == algorithmId) { %><strong><% } %>
 
             <%- names[player.id] %>
-
-            <% if (player.id == algorithmId) { %>(Me)<% } %>
 
           <% if (player.id == algorithmId) { %></strong><% } %>
         </td>

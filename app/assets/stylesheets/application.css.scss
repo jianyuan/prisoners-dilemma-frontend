@@ -23,6 +23,7 @@ $font-family-sans-serif: 'Open Sans', sans-serif;
 @import "twitter/bootstrap/theme";
 
 body {
+  padding-top: 70px;
 }
 
 pre {
@@ -35,10 +36,6 @@ pre {
 
 .site-footer {
   text-align: center;
-  padding: 40px 0;
-  border-top: 1px solid #eee;
-}
-
-.site-body {
+  margin-top: 40px;
   padding: 40px 0;
 }

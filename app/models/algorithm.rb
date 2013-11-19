@@ -56,7 +56,7 @@ class Algorithm < ActiveRecord::Base
         id: row[0].to_i,
         points: row[1].to_i
       }
-    end
+    end.reverse
     response['names'] = names
 
     response
