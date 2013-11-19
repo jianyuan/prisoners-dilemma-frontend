@@ -18,6 +18,11 @@
           Copy
     %h4.name
       = link_to @algorithm.user.name, @algorithm.user
+      \/
+      = link_to @algorithm do
+        - if @algorithm.public?
+          %span.glyphicon.glyphicon-eye-open
+        = @algorithm.name
     %small.text-muted
       Last updated
       = time_tag @algorithm.updated_at, time_ago_in_words(@algorithm.updated_at), title: @algorithm.updated_at
