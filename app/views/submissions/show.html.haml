@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @submission.user
+%p
+  %b Game round:
+  = @submission.game_round
+%p
+  %b Name:
+  = @submission.name
+%p
+  %b Code:
+  = @submission.code
+
+= link_to 'Edit', edit_submission_path(@submission)
+\|
+= link_to 'Back', submissions_path

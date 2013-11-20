@@ -1,15 +1,19 @@
-%p#notice= notice
+.page-header
+  %h1= @game_round.name
 
 %p
-  %b Name:
-  = @game_round.name
-%p
-  %b Started at:
+  %b Starts at:
   = @game_round.started_at
 %p
-  %b Ended at:
+  %b Ends at:
   = @game_round.ended_at
+%p
+  %b Submissions:
+  = @game_round.submissions.count
 
-= link_to 'Edit', edit_game_round_path(@game_round)
-\|
-= link_to 'Back', game_rounds_path
+%hr/
+
+- if can? :manage, @game_round
+  = link_to 'Edit', edit_game_round_path(@game_round)
+  \|
+  = link_to 'Back', game_rounds_path

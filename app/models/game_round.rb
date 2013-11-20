@@ -11,6 +11,8 @@
 #
 
 class GameRound < ActiveRecord::Base
+  has_many :submissions
+
   validates :name, presence: true
   validates :started_at, presence: true
   validates :ended_at, presence: true
@@ -21,6 +23,10 @@ class GameRound < ActiveRecord::Base
 
   def self.current_or_upcoming
     self.starts_earliest.hasnt_ended.first
+  end
+
+  def to_param
+    "#{self.id}-#{self.name.parameterize}"
   end
 
   def end_greater_than_start

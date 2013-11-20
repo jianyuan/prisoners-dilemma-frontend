@@ -23,6 +23,7 @@
 
 class User < ActiveRecord::Base
   has_many :algorithms
+  has_many :submissions
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -1,4 +1,6 @@
 CompetitionFactory::Application.routes.draw do
+  resources :submissions
+
   resources :game_rounds
 
   resources :algorithms do

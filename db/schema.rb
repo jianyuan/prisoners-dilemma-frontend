@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119235126) do
+ActiveRecord::Schema.define(version: 20131120024451) do
 
   create_table "algorithms", force: true do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.text     "code"
+    t.binary   "code"
     t.string   "privacy"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 20131119235126) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "submissions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "game_round_id"
+    t.string   "name"
+    t.binary   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "submissions", ["game_round_id"], name: "index_submissions_on_game_round_id"
+  add_index "submissions", ["user_id"], name: "index_submissions_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false

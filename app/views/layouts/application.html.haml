@@ -19,7 +19,7 @@
           %li= link_to 'My Algorithms', algorithms_path
           - if @current_round.present?
             %li
-              = link_to @current_round do
+              = link_to game_round_path(@current_round, algorithm_id: @algorithm.try(:id)) do
                 %strong Round:
                 = @current_round.name
                 &mdash;
