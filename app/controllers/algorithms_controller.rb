@@ -86,7 +86,7 @@ class AlgorithmsController < ApplicationController
 
   # GET /algorithms/1/benchmark.json
   def benchmark
-    render json: @algorithm.benchmark
+    render json: @algorithm.benchmark(params[:iterations])
   end
 
   # GET /algorithms/1/copy

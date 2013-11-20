@@ -37,7 +37,7 @@ class Algorithm < ActiveRecord::Base
     JSON.parse(response)
   end
 
-  def benchmark
+  def benchmark(iterations = 100)
     names = {}
     names[self.id] = self.name
     source_codes = {}
@@ -48,7 +48,7 @@ class Algorithm < ActiveRecord::Base
       source_codes[algorithm.id] = algorithm.code
     end
 
-    json_response = RestClient.post('http://localhost:5000/round_robin', source_codes: source_codes.to_json, iterations: 100)
+    json_response = RestClient.post('http://localhost:5000/round_robin', source_codes: source_codes.to_json, iterations: iterations)
     response = JSON.parse(json_response)
 
     response['points'] = response['points'].sort_by { |_, value| value }.map do |row|

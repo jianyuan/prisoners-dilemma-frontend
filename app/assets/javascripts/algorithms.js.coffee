@@ -48,6 +48,8 @@ class AlgorithmEditor
 
     @$btnCheckSyntax.on 'ajax:success', (e, data, status, xhr) =>
       @$syntaxCheckerResponse.html(JST['templates/syntax_checker_response'](data))
+
+    @$btnCheckSyntax.on 'ajax:error', @errorHandler
   initBenchmark: ->
     @$btnBenchmark.on 'ajax:before', (e, data, status, xhr) =>
       if $.safetynet.hasChanges()
@@ -57,6 +59,10 @@ class AlgorithmEditor
 
     @$btnBenchmark.on 'ajax:success', (e, data, status, xhr) =>
       @$benchmarkResponse.html(JST['templates/benchmark_response'](data))
+
+    @$btnBenchmark.on 'ajax:error', @errorHandler
+  errorHandler: ->
+    alert 'Whoops! Compiler server is down!'
 
 $ ->
   if $('body.algorithms.edit').length > 0

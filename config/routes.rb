@@ -1,4 +1,6 @@
 CompetitionFactory::Application.routes.draw do
+  resources :game_rounds
+
   resources :algorithms do
     collection do
       get 'all'

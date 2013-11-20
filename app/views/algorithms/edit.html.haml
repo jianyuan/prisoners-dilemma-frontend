@@ -11,7 +11,7 @@
         .panel-heading
           %h3.panel-title Test
         .panel-body
-          = link_to check_syntax_algorithm_path(@algorithm), data: { action: 'check-syntax', remote: true, disable_with: 'Checking Syntax...' }, class: 'btn btn-primary btn-block' do
+          = link_to check_syntax_algorithm_path(@algorithm), data: { action: 'check-syntax', remote: true, disable_with: 'Running...' }, class: 'btn btn-primary btn-block' do
             %span.glyphicon.glyphicon-play
             Run
           %div{:'data-syntax-checker-response' => true}

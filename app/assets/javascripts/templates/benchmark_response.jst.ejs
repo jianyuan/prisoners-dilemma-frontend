@@ -36,44 +36,43 @@
       <tr>
         <th colspan="2" class="text-center">
           <% if (result.players[0] == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
-          <%- names[result.players[0]] %><br>
+          <%- names[result.players[0]] %>
+          <% if (result.players[0] == algorithmId) { %><span class="glyphicon glyphicon-chevron-left"></span><% } %><br>
           vs<br>
           <% if (result.players[1] == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
           <%- names[result.players[1]] %>
+          <% if (result.players[1] == algorithmId) { %><span class="glyphicon glyphicon-chevron-left"></span><% } %>
         </th>
+      </tr>
+      <tr>
+        <th class="col-sm-6">
+          <% if (result.players[0] == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
+          <%- names[result.players[0]] %>
+          <% if (result.players[0] == algorithmId) { %><span class="glyphicon glyphicon-chevron-left"></span><% } %>
+        </th>
+        <th class="col-sm-6">
+          <% if (result.players[1] == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
+          <%- names[result.players[1]] %>
+          <% if (result.players[1] == algorithmId) { %><span class="glyphicon glyphicon-chevron-left"></span><% } %>
+        </th>
+      </tr>
+      <tr>
+        <th colspan="2" class="text-center">Points</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="text-right">Iterations</td>
-        <td><%= result.iterations %></td>
-      </tr>
-      <tr
-        <% if (result.points[0] >= result.points[1]) { %>class="success"<% } %>
-      >
-        <td class="text-right">
-          <% if (result.points[0] >= result.points[1]) { %><span class="glyphicon glyphicon-tower"></span><% } %>
-          <%- names[result.players[0]] %> Points
+        <td class="<% if (result.points[0] >= result.points[1]) { %>success<% } %>">
+          <%= result.points[0] %>
         </td>
-        <td><%= result.points[0] %></td>
-      </tr>
-      <tr
-        <% if (result.points[0] <= result.points[1]) { %>class="success"<% } %>
-      >
-        <td class="text-right">
-          <% if (result.points[0] <= result.points[1]) { %><span class="glyphicon glyphicon-tower"></span><% } %>
-          <%- names[result.players[1]] %> Points
+        <td class="<% if (result.points[0] <= result.points[1]) { %>success<% } %>">
+          <%= result.points[1] %>
         </td>
-        <td><%= result.points[1] %></td>
       </tr>
     </tbody>
     <thead>
       <tr>
         <th colspan="2" class="text-center">Moves</th>
-      </tr>
-      <tr>
-        <th class="col-sm-6 text-right"><%- names[result.players[0]] %></th>
-        <th class="col-sm-6"><%- names[result.players[1]] %></th>
       </tr>
     </thead>
     <tbody>

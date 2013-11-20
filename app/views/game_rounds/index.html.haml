@@ -1,0 +1,23 @@
+%h1 Listing game_rounds
+
+%table
+  %tr
+    %th Name
+    %th Started at
+    %th Ended at
+    %th
+    %th
+    %th
+
+  - @game_rounds.each do |game_round|
+    %tr
+      %td= game_round.name
+      %td= game_round.started_at
+      %td= game_round.ended_at
+      %td= link_to 'Show', game_round
+      %td= link_to 'Edit', edit_game_round_path(game_round)
+      %td= link_to 'Destroy', game_round, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Game round', new_game_round_path

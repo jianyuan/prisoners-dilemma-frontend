@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @game_round.name
+%p
+  %b Started at:
+  = @game_round.started_at
+%p
+  %b Ended at:
+  = @game_round.ended_at
+
+= link_to 'Edit', edit_game_round_path(@game_round)
+\|
+= link_to 'Back', game_rounds_path

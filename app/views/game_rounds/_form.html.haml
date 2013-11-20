@@ -1,0 +1,10 @@
+= simple_form_for(@game_round) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :started_at
+    = f.input :ended_at
+
+  .form-actions
+    = f.button :submit
