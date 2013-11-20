@@ -10,6 +10,7 @@ class AlgorithmEditor
     @doSyntaxCheckLater = false
     @doBenchmarkLater = false
 
+    # Init
     $.safetynet()
     @initForm()
     @initCodeMirror()
@@ -40,7 +41,7 @@ class AlgorithmEditor
     @cm.on 'change', ->
       $.safetynet.raiseChange 'code-changed'
   initSyntaxChecker: ->
-    @$btnCheckSyntax.on 'ajax:before', (e, data, status, xhr) =>
+    @$btnCheckSyntax.on 'ajax:before', (e) =>
       if $.safetynet.hasChanges()
         @doSyntaxCheckLater = true
         @$form.submit()
@@ -51,11 +52,20 @@ class AlgorithmEditor
 
     @$btnCheckSyntax.on 'ajax:error', @errorHandler
   initBenchmark: ->
-    @$btnBenchmark.on 'ajax:before', (e, data, status, xhr) =>
+    @$btnBenchmark.on 'ajax:before', (e) =>
       if $.safetynet.hasChanges()
         @doBenchmarkLater = true
         @$form.submit()
         return false
+
+    @$btnBenchmark.on 'ajax:before', ->
+      $(this).data('params', iterations: $('#iterations').val())
+
+    # @$btnBenchmark.on 'ajax:beforeSend', (e, xhr, settings) =>
+    #   console.log xhr, settings
+    #   settings.data ||= {}
+    #   settings.data['iterations'] = 100
+      # $(this).data('params', 'iterations=' + $('#iterations').val())
 
     @$btnBenchmark.on 'ajax:success', (e, data, status, xhr) =>
       @$benchmarkResponse.html(JST['templates/benchmark_response'](data))

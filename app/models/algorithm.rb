@@ -50,13 +50,6 @@ class Algorithm < ActiveRecord::Base
 
     json_response = RestClient.post('http://localhost:5000/round_robin', source_codes: source_codes.to_json, iterations: iterations)
     response = JSON.parse(json_response)
-
-    response['points'] = response['points'].sort_by { |_, value| value }.map do |row|
-      {
-        id: row[0].to_i,
-        points: row[1].to_i
-      }
-    end.reverse
     response['names'] = names
 
     response

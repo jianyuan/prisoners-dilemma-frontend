@@ -1,3 +1,4 @@
+<hr>
 <h4>Points</h4>
 <table class="table table-bordered">
   <thead>
@@ -7,22 +8,22 @@
     </tr>
   </thead>
   <tbody>
-    <% $.each(points, function(i, player) { %>
+    <% $.each(points, function(player_id, player_points) { %>
       <tr>
         <td class="text-right">
 
-          <% if (player.id == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
+          <% if (player_id == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
 
-          <% if (player.id == algorithmId) { %><strong><% } %>
+          <% if (player_id == algorithmId) { %><strong><% } %>
 
-            <%- names[player.id] %>
+            <%- names[player_id] %>
 
-          <% if (player.id == algorithmId) { %></strong><% } %>
+          <% if (player_id == algorithmId) { %></strong><% } %>
         </td>
         <td>
-          <% if (player.id == algorithmId) { %><strong><% } %>
-            <%= player.points %>
-          <% if (player.id == algorithmId) { %></strong><% } %>
+          <% if (player_id == algorithmId) { %><strong><% } %>
+            <%= player_points %>
+          <% if (player_id == algorithmId) { %></strong><% } %>
         </td>
       </tr>
     <% }) %>
@@ -88,12 +89,18 @@
                 warning
               <% } %>
             ">
-              <% if (move[i]) { %>
-                <%- move[i] %>
-              <% } else { %>
-                <em>Invalid</em>
+              <strong>
+                <% if (move[i]) { %>
+                  <%- move[i] %>
+                <% } else { %>
+                  ?
+                <% } %>
+              </strong>
+              (<%= result.move_points[j][i] %> pts)
+              <% if (result.logs[i][j]) { %>
+                -
+                <%- result.logs[i][j].join(', ') %>
               <% } %>
-              (<%= result.move_points[j][i] %>)
             </td>
           <% } %>
         </tr>

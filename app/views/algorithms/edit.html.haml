@@ -6,23 +6,31 @@
         = button_tag data: { disable_with: 'Saving...' }, class: 'btn btn-primary btn-lg' do
           %span.glyphicon.glyphicon-floppy-disk
           Save
+        = link_to check_syntax_algorithm_path(@algorithm), data: { action: 'check-syntax', remote: true, disable_with: 'Running...' }, class: 'btn btn-primary btn-lg' do
+          %span.glyphicon.glyphicon-play
+          Save and Run
     .col-md-3
       .panel.panel-default
         .panel-heading
-          %h3.panel-title Test
-        .panel-body
-          = link_to check_syntax_algorithm_path(@algorithm), data: { action: 'check-syntax', remote: true, disable_with: 'Running...' }, class: 'btn btn-primary btn-block' do
+          = link_to check_syntax_algorithm_path(@algorithm), data: { action: 'check-syntax', remote: true, disable_with: 'Running...' }, class: 'btn btn-primary' do
             %span.glyphicon.glyphicon-play
             Run
+        .panel-body
           %div{:'data-syntax-checker-response' => true}
 
       .panel.panel-default
         .panel-heading
           %h3.panel-title Benchmark
         .panel-body
-          = link_to benchmark_algorithm_path(@algorithm), data: { action: 'benchmark', remote: true, disable_with: 'Running...' }, class: 'btn btn-primary btn-block' do
-            %span.glyphicon.glyphicon-play
-            Run
+          .row
+            .col-sm-6
+              = link_to benchmark_algorithm_path(@algorithm), data: { action: 'benchmark', remote: true, disable_with: 'Running...' }, class: 'btn btn-primary btn-block' do
+                %span.glyphicon.glyphicon-play
+                Run
+            .col-sm-6
+              .input-group
+                = number_field_tag 'iterations', 20, class: 'form-control', min: 1, max: 200
+                %span.input-group-addon Iterations
           %div{:'data-benchmark-response' => true}
 
       .panel.panel-default
