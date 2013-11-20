@@ -27,7 +27,9 @@ class Ability
       can :manage, Algorithm, user_id: user.id
 
       # User can submit algorithm only once
-      can :submit, GameRound
+      can :submit, GameRound do |game_round|
+        game_round.active?
+      end
       cannot :submit, GameRound do |game_round|
         user.submitted_to_round?(game_round)
       end

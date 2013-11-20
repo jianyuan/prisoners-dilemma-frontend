@@ -13,6 +13,17 @@
       %h4 Reference
       %pre
         %code= render 'guide'
+      %hr/
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title Settings
+        .panel-body
+          = f.input :name
+          -# = f.input :privacy
+          = f.submit 'Save', data: { disable_with: 'Saving...' }, class: 'btn btn-default'
+      - if @current_round.present? && can?(:submit, @current_round)
+        = link_to 'Submit algorithm to this round', new_game_round_submission_path(@current_round, algorithm_id: @algorithm.id), class: 'btn btn-info'
+      = link_to 'View History', @algorithm, class: 'btn btn-default'
     .col-md-3
       .panel.panel-default
         .panel-heading
@@ -36,17 +47,6 @@
                 = number_field_tag 'iterations', 20, class: 'form-control', min: 1, max: 200
                 %span.input-group-addon Iterations
           %div{:'data-benchmark-response' => true}
-
-      .panel.panel-default
-        .panel-heading
-          %h3.panel-title Settings
-        .panel-body
-          = f.input :name
-          -# = f.input :privacy
-          = f.submit 'Save', data: { disable_with: 'Saving...' }, class: 'btn btn-default'
-      %hr/
-
-      = link_to 'View History', @algorithm, class: 'btn btn-default btn-sm'
 
 :javascript
   window.algorithmId = #{@algorithm.id};
