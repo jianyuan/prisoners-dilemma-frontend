@@ -1,5 +1,6 @@
 class GameRoundsController < ApplicationController
-  before_action :set_game_round, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_game_round, only: [:show, :edit, :update, :destroy, :results]
 
   # GET /game_rounds
   # GET /game_rounds.json
@@ -65,6 +66,11 @@ class GameRoundsController < ApplicationController
       format.html { redirect_to game_rounds_url }
       format.json { head :no_content }
     end
+  end
+
+  # GET /game_rounds/1/results
+  def results
+    render json: @game_round.results
   end
 
   private

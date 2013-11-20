@@ -11,9 +11,17 @@
   %b Submissions:
   = @game_round.submissions.count
 
-%hr/
+- if @game_round.active? && can?(:submit, @game_round)
+  %hr/
+  %p
+    = link_to 'New Submission', new_game_round_submission_path(@game_round), class: 'btn btn-primary btn-lg'
+
+- if current_user.submitted_to_round?(@game_round)
+  %hr/
+  %h2 Your have entered this round!
 
 - if can? :manage, @game_round
+  %hr/
   = link_to 'Edit', edit_game_round_path(@game_round)
   \|
   = link_to 'Back', game_rounds_path

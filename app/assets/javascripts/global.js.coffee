@@ -2,5 +2,5 @@ $ ->
   $('[data-countdown]').each ->
     $this = $(this)
     $this.countdown
-      until: $this.text()
+      until: new Date($this.data('end-time') * 1000)
       compact: true

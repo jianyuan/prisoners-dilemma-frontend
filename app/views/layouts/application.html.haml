@@ -19,13 +19,12 @@
           %li= link_to 'My Algorithms', algorithms_path
           - if @current_round.present?
             %li
-              = link_to game_round_path(@current_round, algorithm_id: @algorithm.try(:id)) do
+              = link_to @current_round do
                 %strong Round:
                 = @current_round.name
                 &mdash;
                 Ends in
-                %span{:data => { :countdown => true }}
-                  = @current_round.ended_at
+                %span{:data => { :countdown => true, :end_time => @current_round.ended_at.to_i }}
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li= link_to current_user.name, edit_user_registration_path

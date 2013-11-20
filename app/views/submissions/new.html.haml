@@ -1,5 +1,36 @@
-%h1 New submission
+.page-header
+  %h1
+    = link_to @game_round.name, @game_round
+    \/
+    - if @submission.algorithm.present?
+      = link_to 'New submission', new_game_round_submission_path(@game_round)
+      \/
+      = @submission.algorithm.name
+    - else
+      New submission
+  - unless @submission.algorithm.present?
+    %p Please select your algorithm:
 
-= render 'form'
+- if @algorithms.present?
+  - @algorithms.each do |algorithm|
+    .well.well-sm
+      %h4
+        = algorithm.name
+        %small last update #{time_ago_in_words algorithm.updated_at} ago
+      %pre
+        %code= algorithm.code
+      = link_to 'Select', new_game_round_submission_path(@game_round, algorithm_id: algorithm), class: 'btn btn-primary'
+- else
+  = simple_form_for([@game_round, @submission]) do |f|
+    = f.error_notification
 
-= link_to 'Back', submissions_path
+    = f.hidden_field :algorithm_id
+
+    .form-inputs
+      = f.label :code
+      %pre
+        %code= @submission.code
+
+    .form-actions
+      = link_to 'Back', @game_round, class: 'btn btn-default'
+      = f.button :submit, 'Submit!', class: 'btn btn-primary btn-lg'

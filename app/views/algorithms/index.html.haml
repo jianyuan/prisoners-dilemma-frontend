@@ -5,7 +5,7 @@
   %h1= @page_title
 
 - @algorithms.each do |algorithm|
-  %article.algorithm-item
+  %article.algorithm-item.well.well-sm
     %header
       = image_tag algorithm.user.avatar_url(36), alt: algorithm.user.name, class: 'avatar', width: 36, height: 36
       .actions

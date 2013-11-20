@@ -5,7 +5,7 @@
 #  id                    :integer          not null, primary key
 #  user_id               :integer
 #  name                  :string(255)
-#  code                  :binary
+#  code                  :text
 #  privacy               :string(255)
 #  created_at            :datetime
 #  updated_at            :datetime
@@ -16,6 +16,7 @@
 class Algorithm < ActiveRecord::Base
   belongs_to :user
   belongs_to :original_algorithm, class_name: 'Algorithm'
+  has_many :submissions
 
   extend Enumerize
   enumerize :privacy, in: [:public, :private], default: :private, predicates: true, scope: true

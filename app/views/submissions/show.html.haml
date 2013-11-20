@@ -2,17 +2,16 @@
 
 %p
   %b User:
-  = @submission.user
+  = @submission.user.name
 %p
   %b Game round:
-  = @submission.game_round
+  = @submission.game_round.name
 %p
   %b Name:
   = @submission.name
 %p
   %b Code:
-  = @submission.code
+  %pre
+    %code= @submission.code
 
-= link_to 'Edit', edit_submission_path(@submission)
-\|
-= link_to 'Back', submissions_path
+= link_to 'Back', game_round_submissions_path(@game_round)

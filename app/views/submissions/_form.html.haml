@@ -1,11 +1,10 @@
-= simple_form_for(@submission) do |f|
+= simple_form_for([@game_round, @submission]) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.association :user
-    = f.association :game_round
     = f.input :name
-    = f.input :code
+    = f.label :code
+    %pre
+      %code= @submission.code
 
-  .form-actions
-    = f.button :submit
+  = f.button :submit, 'Submit!', class: 'btn btn-primary btn-lg'

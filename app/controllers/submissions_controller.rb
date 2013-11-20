@@ -1,74 +1,76 @@
 class SubmissionsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_game_round
+  before_action :ensure_game_round_active
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
 
   # GET /submissions
-  # GET /submissions.json
   def index
-    @submissions = Submission.all
+    authorize! :manage, Submission
+    @submissions = @game_round.submissions.all
   end
 
   # GET /submissions/1
-  # GET /submissions/1.json
   def show
+    authorize! :manage, Submission
   end
 
   # GET /submissions/new
   def new
-    @submission = Submission.new
-  end
+    @submission = @game_round.submissions.new
+    authorize! :submit, @game_round
 
-  # GET /submissions/1/edit
-  def edit
-  end
-
-  # POST /submissions
-  # POST /submissions.json
-  def create
-    @submission = Submission.new(submission_params)
-
-    respond_to do |format|
-      if @submission.save
-        format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @submission }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
+    if params[:algorithm_id].present?
+      algorithm = current_user.algorithms.find(params[:algorithm_id])
+      @submission.set_algorithm(algorithm)
+    else
+      @algorithms = current_user.algorithms.latest
     end
   end
 
-  # PATCH/PUT /submissions/1
-  # PATCH/PUT /submissions/1.json
-  def update
-    respond_to do |format|
-      if @submission.update(submission_params)
-        format.html { redirect_to @submission, notice: 'Submission was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
+  # POST /submissions
+  def create
+    algorithm = current_user.algorithms.find(submission_params[:algorithm_id])
+
+    @submission = @game_round.submissions.new
+    @submission.user = current_user
+    @submission.set_algorithm(algorithm)
+
+    authorize! :submit, @game_round
+
+    if @submission.save
+      redirect_to @game_round, notice: 'Submission was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
   # DELETE /submissions/1
   # DELETE /submissions/1.json
   def destroy
+    authorize! :destroy, @submission
     @submission.destroy
     respond_to do |format|
-      format.html { redirect_to submissions_url }
+      format.html { redirect_to game_round_submissions_url(@game_round) }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def set_game_round
+      @game_round = GameRound.find(params[:game_round_id])
+    end
+
     def set_submission
       @submission = Submission.find(params[:id])
     end
 
+    def ensure_game_round_active
+      redirect_to @game_round, alert: 'This round has ended!' unless @game_round.active?
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      params.require(:submission).permit(:user_id, :game_round_id, :name, :code)
+      params.require(:submission).permit(:algorithm_id)
     end
 end

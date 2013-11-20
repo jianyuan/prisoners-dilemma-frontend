@@ -10,7 +10,14 @@ class Ability
       can :manage, Algorithm
 
       can :manage, GameRound
+
+      can :manage, Submission
     end
+
+    # Cannot submit multiple times
+    # cannot :create, Submission do |submission|
+    #   user.submissions.where(game_round: submission.game_round).any?
+    # end
 
     if user.persisted?
       # User can copy public algorithms
@@ -18,6 +25,12 @@ class Ability
 
       # User can manage his own algorithms
       can :manage, Algorithm, user_id: user.id
+
+      # User can submit algorithm only once
+      can :submit, GameRound
+      cannot :submit, GameRound do |game_round|
+        user.submitted_to_round?(game_round)
+      end
     end
 
     # Guest can view public algorithms

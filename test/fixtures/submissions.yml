@@ -6,9 +6,10 @@
 #  user_id       :integer
 #  game_round_id :integer
 #  name          :string(255)
-#  code          :binary
+#  code          :text
 #  created_at    :datetime
 #  updated_at    :datetime
+#  algorithm_id  :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
