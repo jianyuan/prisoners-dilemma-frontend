@@ -9,6 +9,10 @@
         = link_to check_syntax_algorithm_path(@algorithm), data: { action: 'check-syntax', remote: true, disable_with: 'Running...' }, class: 'btn btn-primary btn-lg' do
           %span.glyphicon.glyphicon-play
           Save and Run
+      %hr/
+      %h4 Reference
+      %pre
+        %code= render 'guide'
     .col-md-3
       .panel.panel-default
         .panel-heading

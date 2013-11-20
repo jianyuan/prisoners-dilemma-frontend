@@ -14,11 +14,13 @@
 
           <% if (player_id == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
 
-          <% if (player_id == algorithmId) { %><strong><% } %>
-
+          <% if (player_id == algorithmId) { %>
+            <strong><%- names[player_id] %></strong>
+          <% } else { %>
             <%- names[player_id] %>
+          <% } %>
 
-          <% if (player_id == algorithmId) { %></strong><% } %>
+          <% if (player_id == algorithmId) { %><span class="glyphicon glyphicon-chevron-left"></span><% } %>
         </td>
         <td>
           <% if (player_id == algorithmId) { %><strong><% } %>
@@ -34,17 +36,6 @@
 <% $.each(results, function(i, result) { %>
   <table class="table table-bordered table-condensed">
     <thead>
-      <tr>
-        <th colspan="2" class="text-center">
-          <% if (result.players[0] == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
-          <%- names[result.players[0]] %>
-          <% if (result.players[0] == algorithmId) { %><span class="glyphicon glyphicon-chevron-left"></span><% } %><br>
-          vs<br>
-          <% if (result.players[1] == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
-          <%- names[result.players[1]] %>
-          <% if (result.players[1] == algorithmId) { %><span class="glyphicon glyphicon-chevron-left"></span><% } %>
-        </th>
-      </tr>
       <tr>
         <th class="col-sm-6">
           <% if (result.players[0] == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
