@@ -6,3 +6,29 @@
       %span.label.label-info Admin
 
 = simple_format @user.description, class: 'well'
+
+- if @algorithms.any?
+  .page-header
+    %h3 Algorithms
+  - @algorithms.each do |algorithm|
+    %article.algorithm-item
+      %header
+        = image_tag algorithm.user.avatar_url(36), alt: algorithm.user.name, class: 'avatar', width: 36, height: 36
+        .actions
+          - if can? :copy, algorithm
+            = link_to copy_algorithm_path(algorithm), class: 'btn btn-default', method: :post do
+              %span.glyphicon.glyphicon-retweet
+              Copy
+        %h4.name
+          = link_to algorithm.user.name, algorithm.user
+          \/
+          = link_to algorithm.name, algorithm
+          - if algorithm.public?
+            %span.label.label-success Public
+        %small.text-muted
+          Last updated
+          = time_tag algorithm.updated_at, time_ago_in_words(algorithm.updated_at), title: algorithm.updated_at
+          ago
+      = link_to (can?(:edit, algorithm) ? edit_algorithm_path(algorithm) : algorithm), class: 'code-link' do
+        %pre
+          %code= algorithm.code

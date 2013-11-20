@@ -14,7 +14,7 @@ CompetitionFactory::Application.routes.draw do
   end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  resources :users, only: [:show]
+  resources :users, only: [:index, :show]
 
   root 'algorithms#index'
 
