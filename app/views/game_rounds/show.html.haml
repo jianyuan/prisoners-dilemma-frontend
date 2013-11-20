@@ -19,6 +19,7 @@
 - if current_user.submitted_to_round?(@game_round)
   %hr/
   %h2 Your have entered this round!
+  %h1 Your ID was #{current_user.submission_for_round(@game_round).id}
 
 - if can? :manage, @game_round
   %hr/

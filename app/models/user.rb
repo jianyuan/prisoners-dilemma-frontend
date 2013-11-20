@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
     Identicon.data_url_for(self.id, size)
   end
 
+  def submission_for_round(game_round)
+    self.submissions.where(game_round: game_round).first
+  end
+
   def submitted_to_round?(game_round)
     self.submissions.where(game_round: game_round).any?
   end
