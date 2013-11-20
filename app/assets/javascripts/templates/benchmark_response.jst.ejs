@@ -8,24 +8,24 @@
     </tr>
   </thead>
   <tbody>
-    <% $.each(points, function(player_id, player_points) { %>
+    <% $.each(points, function(i, point) { %>
       <tr>
         <td class="text-right">
 
-          <% if (player_id == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
+          <% if (point[0] == algorithmId) { %><span class="glyphicon glyphicon-chevron-right"></span><% } %>
 
-          <% if (player_id == algorithmId) { %>
-            <strong><%- names[player_id] %></strong>
+          <% if (point[0] == algorithmId) { %>
+            <strong><%- names[point[0]] %></strong>
           <% } else { %>
-            <%- names[player_id] %>
+            <%- names[point[0]] %>
           <% } %>
 
-          <% if (player_id == algorithmId) { %><span class="glyphicon glyphicon-chevron-left"></span><% } %>
+          <% if (point[0] == algorithmId) { %><span class="glyphicon glyphicon-chevron-left"></span><% } %>
         </td>
         <td>
-          <% if (player_id == algorithmId) { %><strong><% } %>
-            <%= player_points %>
-          <% if (player_id == algorithmId) { %></strong><% } %>
+          <% if (point[0] == algorithmId) { %><strong><% } %>
+            <%= point[1] %>
+          <% if (point[0] == algorithmId) { %></strong><% } %>
         </td>
       </tr>
     <% }) %>
