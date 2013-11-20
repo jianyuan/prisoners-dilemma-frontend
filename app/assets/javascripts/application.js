@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.turbolinks
+// require jquery.turbolinks
+//= require jquery.countdown
 // require turbolinks
 //= require twitter/bootstrap
 //= require codemirror

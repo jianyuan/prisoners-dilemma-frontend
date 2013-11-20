@@ -8,6 +8,8 @@ class Ability
 
     if user.admin?
       can :manage, Algorithm
+
+      can :manage, GameRound
     end
 
     if user.persisted?

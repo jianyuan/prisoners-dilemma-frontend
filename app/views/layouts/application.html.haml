@@ -11,20 +11,27 @@
     = csrf_meta_tags
 
   %body{:class => "#{controller_name.parameterize} #{action_name.parameterize}"}
-    .navbar.navbar-fixed-top.navbar-inverse{:role => 'navigation'}
+    .navbar.navbar-fixed-top.navbar-default{:role => 'navigation'}
       = link_to 'Competition Factory', root_path, class: 'navbar-brand'
       %ul.nav.navbar-nav
         %li= link_to 'Public Algorithms', public_algorithms_path
         - if user_signed_in?
           %li= link_to 'My Algorithms', algorithms_path
+          - if @current_round.present?
+            %li
+              = link_to @current_round do
+                %strong Round:
+                = @current_round.name
+                &mdash;
+                Ends in
+                %span{:data => { :countdown => true }}
+                  = @current_round.ended_at
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li= link_to current_user.name, edit_user_registration_path
           %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
         - else
           %li= link_to 'Sign In', user_omniauth_authorize_path(provider: :eesoc)
-          -#%li= link_to 'Sign Up', new_user_registration_path
-          -#%li= link_to 'Sign In', new_user_session_path
 
     .site-body
       - if content_for? :container

@@ -4,6 +4,7 @@ class GameRoundsController < ApplicationController
   # GET /game_rounds
   # GET /game_rounds.json
   def index
+    authorize! :manage, GameRound
     @game_rounds = GameRound.all
   end
 
@@ -14,16 +15,19 @@ class GameRoundsController < ApplicationController
 
   # GET /game_rounds/new
   def new
+    authorize! :create, GameRound
     @game_round = GameRound.new
   end
 
   # GET /game_rounds/1/edit
   def edit
+    authorize! :update, @game_round
   end
 
   # POST /game_rounds
   # POST /game_rounds.json
   def create
+    authorize! :create, GameRound
     @game_round = GameRound.new(game_round_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class GameRoundsController < ApplicationController
   # PATCH/PUT /game_rounds/1
   # PATCH/PUT /game_rounds/1.json
   def update
+    authorize! :update, @game_round
     respond_to do |format|
       if @game_round.update(game_round_params)
         format.html { redirect_to @game_round, notice: 'Game round was successfully updated.' }
@@ -54,6 +59,7 @@ class GameRoundsController < ApplicationController
   # DELETE /game_rounds/1
   # DELETE /game_rounds/1.json
   def destroy
+    authorize! :destroy, @game_round
     @game_round.destroy
     respond_to do |format|
       format.html { redirect_to game_rounds_url }
